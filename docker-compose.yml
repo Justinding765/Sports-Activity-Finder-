@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  frontend-service-3000:
+    image: my-frontend-app:latest
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend-service
+
+  frontend-service-3001:
+    image: my-frontend-app:latest
+    build:
+      context: ./frontend
+    ports:
+      - "3001:3000"
+    depends_on:
+      - backend-service
+
+
+  backend-service:
+    image: my-backend-app:latest
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000"
+
+    environment:
+      FLASK_ENV: development
+      FLASK_APP: app.py
+      FLASK_DEBUG: 1
